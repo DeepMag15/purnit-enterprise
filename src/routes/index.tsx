@@ -1,90 +1,73 @@
-/**
- * Application Routes
- * Centralized route configuration
- */
-
 import { createBrowserRouter, Navigate } from 'react-router-dom';
-import { GuestLayout } from '@/layouts';
-import { AuthLayout } from '@/layouts';
+import { GuestLayout, AuthLayout } from '@/layouts';
 import {
   HomePage,
   LoginPage,
   RegisterPage,
+  ForgotPasswordPage,
+  EmailVerificationPage,
+  EmployeeLoginPage,
+  CompanyLoginPage,
+  ResetPasswordPage,
   DashboardPage,
+  HRDashboardPage,
+  ManagerDashboardPage,
+  EmployeeDashboardPage,
+  WorkspaceSetupPage,
   ProjectsPage,
   TasksPage,
   MeetingsPage,
   AnalyticsPage,
   SettingsPage,
   ProfilePage,
+  HRPage,
+  CRMPage,
+  DocumentsPage,
+  ReportsPage,
+  AIPage,
+  HelpPage,
+  CompanyPage,
   NotFoundPage,
 } from '@/pages';
-import { ROUTES } from '@/constants';
 
 export const router = createBrowserRouter([
-  // Home (standalone — no layout)
-  {
-    path: ROUTES.HOME,
-    element: <HomePage />,
-  },
-
-  // Guest routes (unauthenticated)
+  { path: '/', element: <HomePage /> },
+  { path: '/workspace-setup', element: <WorkspaceSetupPage /> },
   {
     element: <GuestLayout />,
     children: [
-      {
-        path: ROUTES.LOGIN,
-        element: <LoginPage />,
-      },
-      {
-        path: ROUTES.REGISTER,
-        element: <RegisterPage />,
-      },
+      { path: '/login', element: <LoginPage /> },
+      { path: '/register', element: <RegisterPage /> },
+      { path: '/forgot-password', element: <ForgotPasswordPage /> },
+      { path: '/email-verification', element: <EmailVerificationPage /> },
+      { path: '/employee-login', element: <EmployeeLoginPage /> },
+      { path: '/company-login', element: <CompanyLoginPage /> },
+      { path: '/reset-password', element: <ResetPasswordPage /> },
     ],
   },
-
-  // Authenticated routes
   {
     element: <AuthLayout />,
     children: [
-      {
-        path: ROUTES.DASHBOARD,
-        element: <DashboardPage />,
-      },
-      {
-        path: ROUTES.PROJECTS,
-        element: <ProjectsPage />,
-      },
-      {
-        path: ROUTES.TASKS,
-        element: <TasksPage />,
-      },
-      {
-        path: ROUTES.MEETINGS,
-        element: <MeetingsPage />,
-      },
-      {
-        path: ROUTES.ANALYTICS,
-        element: <AnalyticsPage />,
-      },
-      {
-        path: ROUTES.SETTINGS,
-        element: <SettingsPage />,
-      },
-      {
-        path: ROUTES.PROFILE,
-        element: <ProfilePage />,
-      },
+      { path: '/dashboard', element: <DashboardPage /> },
+      { path: '/dashboard/hr', element: <HRDashboardPage /> },
+      { path: '/dashboard/manager', element: <ManagerDashboardPage /> },
+      { path: '/dashboard/employee', element: <EmployeeDashboardPage /> },
+      { path: '/projects', element: <ProjectsPage /> },
+      { path: '/tasks', element: <TasksPage /> },
+      { path: '/meetings', element: <MeetingsPage /> },
+      { path: '/analytics', element: <AnalyticsPage /> },
+      { path: '/reports', element: <ReportsPage /> },
+      { path: '/settings', element: <SettingsPage /> },
+      { path: '/profile', element: <ProfilePage /> },
+      { path: '/hr', element: <HRPage /> },
+      { path: '/hr/:section', element: <HRPage /> },
+      { path: '/crm', element: <CRMPage /> },
+      { path: '/documents', element: <DocumentsPage /> },
+      { path: '/ai', element: <AIPage /> },
+      { path: '/help', element: <HelpPage /> },
+      { path: '/company', element: <CompanyPage /> },
     ],
   },
-
-  // 404
-  {
-    path: ROUTES.NOT_FOUND,
-    element: <NotFoundPage />,
-  },
-  {
-    path: '*',
-    element: <Navigate to={ROUTES.NOT_FOUND} replace />,
-  },
+  { path: '/404', element: <NotFoundPage /> },
+  { path: '*', element: <Navigate to="/404" replace /> },
 ]);
